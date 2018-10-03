@@ -1,3 +1,8 @@
 body {
     text-align: center;
 }
+
+/* class to toggle the modal*/
+.hide {
+  display:none;
+}
