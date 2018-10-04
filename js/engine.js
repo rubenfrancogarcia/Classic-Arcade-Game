@@ -29,8 +29,13 @@ var Engine = (function(global) {
     const modal = document.querySelector('.modal-background');
     const replay = document.querySelector('.modal-button');
 
-
-
+    //resets the game upon clicking the replay button
+    replay.addEventListener('click', function(){
+         modal.classList.toggle('hide');
+         player.reset();
+         player.victory = false;
+        win.requestAnimationFrame(main);
+    });
 
     canvas.width = 505;
     canvas.height = 606;
@@ -63,13 +68,6 @@ var Engine = (function(global) {
         /* Use the browser's requestAnimationFrame function to call this
          * function again as soon as the browser is able to draw another frame.
          */
-      //resets the game upon clicking the replay button
-      replay.addEventListener('click', function(){
-           modal.classList.toggle('hide');
-           player.reset();
-           player.victory = false;
-          win.requestAnimationFrame(main);
-      });
     //when the player wins, it stops animation and toggle the modal screen
     if (player.victory === true) {
             win.cancelAnimationFrame(id);
@@ -77,19 +75,14 @@ var Engine = (function(global) {
             }
             //otherwise, it lets the animation run
     else {
-              id = win.requestAnimationFrame(main);
+              win.requestAnimationFrame(main);
             }
 
     }
-
     /* This function does some initial setup that should only occur once,
      * particularly setting the lastTime variable that is required for the
      * game loop.
      */
-
-
-
-
     function init() {
         reset();
         lastTime = Date.now();

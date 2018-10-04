@@ -1,21 +1,14 @@
 //numbers represent pixels
-// Enemies our player must avoid
-var Enemy = function(x, y, speed) {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
-
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
-    //enemy properties
+//This creates a class for our enemies and addresses inputs
+class Enemy {
+  constructor(x, y, speed){
     this.sprite = 'images/enemy-bug.png';
     this.x = x;
     this.y = 60 + y;
     this.step = 101;
     this.speed = speed;
-
-
-
-};
+  }
+}
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
@@ -60,8 +53,6 @@ class Hero {
   reset(){
     this.x = this.startx;
     this.y = this.starty;
-
-
   }
 
   //determines action for crashing into a enemy or reaching the goal tile
@@ -80,37 +71,48 @@ class Hero {
   handleInput(input){
     switch(input) {
       case "left":
-       if(this.x>0){this.x -= this.step;}
+       if(this.x>0){
+         this.x -= this.step;
+       }
         break;
       case "right":
-      if(this.x < 4 * this.step){this.x += this.step;}
+      if(this.x < 4 * this.step){
+        this.x += this.step;
+      }
         break;
       case "up":
-      if(this.y > this.jump){this.y -= this.jump;}
+      if(this.y > this.jump){
+        this.y -= this.jump;
+      }
         break;
       case "down":
-      if(this.y < this.jump * 4) {this.y += this.jump;}
+      if(this.y < this.jump * 4){
+        this.y += this.jump;
+      }
         break;
     }
   }
 }
 
-//creation of all enemies with various inputs
-const bug1 = new Enemy(-101, 0, 400);
-const bug2 = new Enemy(-101, 83, 300);
-const bug3= new Enemy(-101, 166, 275);
-const bug4 = new Enemy(-202, 166, 255);
-const allEnemies = [];
-allEnemies.push(bug1, bug2, bug3, bug4);
+//creation of all enemies with various inputs within an array
+const allEnemies = [
+  new Enemy(-101, 0, 400),
+  new Enemy(-101, 83, 300),
+  new Enemy(-101, 166, 275),
+  new Enemy(-101, 0, 255),
+  new Enemy(-202, 0, 275),
+  new Enemy(-202, 166, 255),
+  new Enemy(-202, 83, 255),
+  new Enemy(-202, 0, 500),
+  new Enemy(-202, 0, 450),
+  new Enemy(-202, 83, 255),
+  new Enemy(-202, 0, 500),
+  new Enemy(-202, 0, 700)
+
+];
 
 //our player created
 const player = new Hero();
-
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
-
-
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
